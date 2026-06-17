@@ -1,0 +1,51 @@
+replicaCount: 2
+
+image:
+  repository: 22009988/go-shortener
+  tag: v1.0.0
+
+ingress:
+  host: go-short.cd.me
+
+# Application
+# Tương ứng biến ENV (development | production)
+env: production
+
+# HTTP server (tiền tố SERVER_)
+server:
+  port: 8080
+  readTimeout: 5s
+  writeTimeout: 10s
+  idleTimeout: 120s
+  shutdownTimeout: 10s
+
+# PostgreSQL (tiền tố DB_)
+db:
+  # Host chính là tên Service của Postgres trong K8s.
+  # Cú pháp chuẩn: <tên-service>.<namespace>.svc.cluster.local
+  host: "hdp-db-rw.default.svc.cluster.local"
+  port: 5432
+  user: "admin"
+  name: "hdp"
+  sslMode: "disable"
+  timeZone: "UTC"
+  maxOpenConns: 25
+  maxIdleConns: 25
+  connMaxLifetime: "5m"
+
+  # Chỉ định tên Secret và Key mà Helm Postgres đã tạo sẵn (cho DB_PASSWORD)
+  existingSecretName: "hdp-db-secret"
+  existingSecretKey: "password"
+
+# URL shortener (tiền tố SHORTENER_)
+shortener:
+  # Origin công khai dùng để build short URL (nên khớp với ingress.host)
+  baseURL: "http://go-short.cd.me"
+  codeLength: 7
+
+  # Danh sách API key (phân tách bằng dấu phẩy) nhận trên header X-API-Key.
+  # Production nên dùng Secret: set apiKeysSecretName + apiKeysSecretKey thay vì
+  # để key ở đây. Khi apiKeysSecretName rỗng, giá trị apiKeys dưới đây được dùng.
+  apiKeys: "dev-key-1,dev-key-2"
+  apiKeysSecretName: ""
+  apiKeysSecretKey: "api-keys"
