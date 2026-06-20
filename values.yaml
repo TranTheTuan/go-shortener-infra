@@ -26,8 +26,8 @@ db:
   name: "hdp"
   sslMode: "disable"
   timeZone: "UTC"
-  maxOpenConns: 25
-  maxIdleConns: 25
+  maxOpenConns: 40
+  maxIdleConns: 40
   connMaxLifetime: "5m"
   # Chỉ định tên Secret và Key mà Helm Postgres đã tạo sẵn (cho DB_PASSWORD)
   existingSecretName: "hdp-db-secret"
@@ -39,7 +39,7 @@ redis:
   host: "redis-cache-master.hdp.svc.cluster.local"
   port: 6379
   db: 0
-  poolSize: 10
+  poolSize: 300
   minIdleConns: 5
   # Khi existingSecretName rỗng, Redis kết nối không cần password.
   existingSecretName: "redis-secret"
