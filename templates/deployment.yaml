@@ -34,6 +34,8 @@ spec:
           value: {{ .Values.server.idleTimeout | quote }}
         - name: SERVER_SHUTDOWN_TIMEOUT
           value: {{ .Values.server.shutdownTimeout | quote }}
+        - name: SERVER_PPROF_ADDR
+          value: {{ .Values.server.pprofAddr | quote }}
         # PostgreSQL
         - name: DB_HOST
           value: {{ .Values.db.host | quote }}
@@ -72,3 +74,25 @@ spec:
         {{- end }}
         - name: SHORTENER_CODE_LENGTH
           value: {{ .Values.shortener.codeLength | quote }}
+        - name: SHORTENER_CACHE_TTL
+          value: {{ .Values.shortener.cacheTTL | quote }}
+        # Redis
+        - name: REDIS_HOST
+          value: {{ .Values.redis.host | quote }}
+        - name: REDIS_PORT
+          value: {{ .Values.redis.port | quote }}
+        - name: REDIS_DB
+          value: {{ .Values.redis.db | quote }}
+        - name: REDIS_POOL_SIZE
+          value: {{ .Values.redis.poolSize | quote }}
+        - name: REDIS_MIN_IDLE_CONNS
+          value: {{ .Values.redis.minIdleConns | quote }}
+        - name: REDIS_PASSWORD
+        {{- if .Values.redis.existingSecretName }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.redis.existingSecretName }}
+              key: {{ .Values.redis.existingSecretKey }}
+        {{- else }}
+          value: ""
+        {{- end }}
