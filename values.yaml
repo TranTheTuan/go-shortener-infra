@@ -36,7 +36,7 @@ db:
 redis:
   # Host chính là tên Service của Redis trong K8s.
   # Cú pháp chuẩn: <tên-service>.<namespace>.svc.cluster.local
-  host: "redis-cache-master.hdp.svc.cluster.local"
+  host: "redis-cache-master.default.svc.cluster.local"
   port: 6379
   db: 0
   poolSize: 300
