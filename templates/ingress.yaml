@@ -4,6 +4,9 @@ metadata:
   name: {{ .Release.Name }}-ingress
   namespace: default
   annotations:
+    nginx.ingress.kubernetes.io/limit-connections: "5"
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "2"
 spec:
   ingressClassName: nginx
   rules:
