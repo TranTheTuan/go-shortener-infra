@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  # Application
+  ENV: {{ .Values.env | quote }}
+  # HTTP server
+  SERVER_HOST: "0.0.0.0"
+  SERVER_PORT: {{ .Values.server.port | quote }}
+  SERVER_READ_TIMEOUT: {{ .Values.server.readTimeout | quote }}
+  SERVER_WRITE_TIMEOUT: {{ .Values.server.writeTimeout | quote }}
+  SERVER_IDLE_TIMEOUT: {{ .Values.server.idleTimeout | quote }}
+  SERVER_SHUTDOWN_TIMEOUT: {{ .Values.server.shutdownTimeout | quote }}
+  SERVER_PPROF_ADDR: {{ .Values.server.pprofAddr | quote }}
+  # PostgreSQL (password lấy từ Secret, không đặt ở đây)
+  DB_HOST: {{ .Values.db.host | quote }}
+  DB_PORT: {{ .Values.db.port | quote }}
+  DB_USER: {{ .Values.db.user | quote }}
+  DB_NAME: {{ .Values.db.name | quote }}
+  DB_SSLMODE: {{ .Values.db.sslMode | quote }}
+  DB_TIMEZONE: {{ .Values.db.timeZone | quote }}
+  DB_MAX_OPEN_CONNS: {{ .Values.db.maxOpenConns | quote }}
+  DB_MAX_IDLE_CONNS: {{ .Values.db.maxIdleConns | quote }}
+  DB_CONN_MAX_LIFETIME: {{ .Values.db.connMaxLifetime | quote }}
+  # URL shortener (API keys lấy từ Secret/env riêng, không đặt ở đây)
+  SHORTENER_BASE_URL: {{ .Values.shortener.baseURL | quote }}
+  SHORTENER_CODE_LENGTH: {{ .Values.shortener.codeLength | quote }}
+  SHORTENER_CACHE_TTL: {{ .Values.shortener.cacheTTL | quote }}
+  # Redis (password lấy từ Secret, không đặt ở đây)
+  REDIS_HOST: {{ .Values.redis.host | quote }}
+  REDIS_PORT: {{ .Values.redis.port | quote }}
+  REDIS_DB: {{ .Values.redis.db | quote }}
+  REDIS_POOL_SIZE: {{ .Values.redis.poolSize | quote }}
+  REDIS_MIN_IDLE_CONNS: {{ .Values.redis.minIdleConns | quote }}
