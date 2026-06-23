@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: 22009988/go-shortener
-  tag: sha-0411063
+  tag: sha-5cc93f8
 ingress:
   host: go-short.cd.me
 # Application
