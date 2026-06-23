@@ -33,3 +33,8 @@ data:
   REDIS_DB: {{ .Values.redis.db | quote }}
   REDIS_POOL_SIZE: {{ .Values.redis.poolSize | quote }}
   REDIS_MIN_IDLE_CONNS: {{ .Values.redis.minIdleConns | quote }}
+  # Authentication
+  AUTH_JWT_SECRET: {{ .Values.auth.jwtSecret | quote }}
+  AUTH_ACCESS_TTL: {{ .Values.auth.accessTTL | quote }}
+  AUTH_REFRESH_TTL: {{ .Values.auth.refreshTTL | quote }}
+  AUTH_BCRYPT_COST: {{ .Values.auth.bcryptCost | quote }}

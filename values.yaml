@@ -56,3 +56,9 @@ shortener:
   apiKeys: "dev-key-1,dev-key-2"
   apiKeysSecretName: ""
   apiKeysSecretKey: "api-keys"
+# Authentication (tiền tố AUTH_)
+auth:
+  jwtSecret: "my-jwt-secret"
+  accessTTL: "15m"
+  refreshTTL: "168h"
+  bcryptCost: 12
