@@ -33,8 +33,12 @@ data:
   REDIS_DB: {{ .Values.redis.db | quote }}
   REDIS_POOL_SIZE: {{ .Values.redis.poolSize | quote }}
   REDIS_MIN_IDLE_CONNS: {{ .Values.redis.minIdleConns | quote }}
-  # Authentication
-  AUTH_JWT_SECRET: {{ .Values.auth.jwtSecret | quote }}
-  AUTH_ACCESS_TTL: {{ .Values.auth.accessTTL | quote }}
-  AUTH_REFRESH_TTL: {{ .Values.auth.refreshTTL | quote }}
-  AUTH_BCRYPT_COST: {{ .Values.auth.bcryptCost | quote }}
+  # Authentication — Keycloak (OIDC resource server; app chỉ validate token)
+  KEYCLOAK_ISSUER: {{ .Values.keycloak.issuer | quote }}
+  KEYCLOAK_JWKS_URL: {{ .Values.keycloak.jwksURL | quote }}
+  KEYCLOAK_CLIENT_ID: {{ .Values.keycloak.clientID | quote }}
+  # Daily link quota (mỗi user đã xác thực)
+  QUOTA_DEFAULT_PLAN_CODE: {{ .Values.quota.defaultPlanCode | quote }}
+  QUOTA_BASIC_FALLBACK_LIMIT: {{ .Values.quota.basicFallbackLimit | quote }}
+  QUOTA_BREAKER_MAX_FAILURES: {{ .Values.quota.breakerMaxFailures | quote }}
+  QUOTA_BREAKER_OPEN_TIMEOUT: {{ .Values.quota.breakerOpenTimeout | quote }}
