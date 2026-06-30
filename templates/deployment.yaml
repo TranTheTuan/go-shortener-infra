@@ -29,15 +29,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.db.existingSecretName }}
               key: {{ .Values.db.existingSecretKey }}
-        - name: SHORTENER_API_KEYS
-        {{- if .Values.shortener.apiKeysSecretName }}
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.shortener.apiKeysSecretName }}
-              key: {{ .Values.shortener.apiKeysSecretKey }}
-        {{- else }}
-          value: {{ .Values.shortener.apiKeys | quote }}
-        {{- end }}
         - name: REDIS_PASSWORD
         {{- if .Values.redis.existingSecretName }}
           valueFrom:
