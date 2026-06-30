@@ -3,7 +3,7 @@ image:
   repository: 22009988/go-shortener
   tag: sha-18f869d
 ingress:
-  host: go-short.cd.me
+  host: go-short.tonytran.xyz
 # Application
 # Tương ứng biến ENV (development | production)
 env: production
@@ -59,7 +59,7 @@ shortener:
 # Authentication — Keycloak OIDC (tiền tố KEYCLOAK_; app chỉ validate token)
 keycloak:
   # ISSUER: token issuer CÔNG KHAI; phải khớp đúng `iss` trong access token.
-  issuer: "https://auth.cd.me/realms/nine-realms"
+  issuer: "https://auth.tonytran.xyz/realms/nine-realms"
   # JWKS_URL: endpoint certs IN-CLUSTER (host nội bộ + path chuẩn của Keycloak).
   # Thêm port của service nếu khác 80.
   jwksURL: "http://keycloak-keycloakx-http.keycloak.svc.cluster.local/realms/nine-realms/protocol/openid-connect/certs"
