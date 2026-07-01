@@ -47,7 +47,7 @@ redis:
 # URL shortener (tiền tố SHORTENER_)
 shortener:
   # Origin công khai dùng để build short URL (nên khớp với ingress.host)
-  baseURL: "http://go-short.cd.me"
+  baseURL: "https://go-short.tonytran.xyz"
   codeLength: 7
   cacheTTL: "24h"
   # Danh sách API key (phân tách bằng dấu phẩy) nhận trên header X-API-Key.
