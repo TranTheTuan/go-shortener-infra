@@ -1,0 +1,40 @@
+{{- if .Values.consumer.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-consumer
+spec:
+  replicas: {{ .Values.consumer.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-consumer
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-consumer
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+      - name: consumer
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        args: ["analyze"]
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-config
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.db.existingSecretName }}
+              key: {{ .Values.db.existingSecretKey }}
+        - name: KAFKA_SASL_PASSWORD
+        {{- if .Values.kafka.existingSecretName }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.kafka.existingSecretName }}
+              key: {{ .Values.kafka.existingSecretKey }}
+        {{- else }}
+          value: ""
+        {{- end }}
+{{- end }}

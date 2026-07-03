@@ -71,6 +71,11 @@ quota:
   basicFallbackLimit: 10
   breakerMaxFailures: 10
   breakerOpenTimeout: "5m"
+# Analytics consumer (chạy mode "analyze" — cùng image với server, không có HTTP port)
+consumer:
+  enabled: true
+  replicaCount: 1   # tăng nếu topic có nhiều partition; franz-go tự rebalance
+
 # Kafka (tiền tố KAFKA_; để trống brokers = tắt Kafka, dùng inline fallback)
 kafka:
   # Danh sách brokers (phân tách bằng dấu phẩy). Rỗng = tắt Kafka.
