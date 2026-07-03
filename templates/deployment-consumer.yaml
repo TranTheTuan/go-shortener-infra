@@ -18,6 +18,7 @@ spec:
       containers:
       - name: consumer
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["./main"]
         args: ["analyze"]
         envFrom:
         - configMapRef:
