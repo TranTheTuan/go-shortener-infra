@@ -71,3 +71,16 @@ quota:
   basicFallbackLimit: 10
   breakerMaxFailures: 10
   breakerOpenTimeout: "5m"
+# Kafka (tiền tố KAFKA_; để trống brokers = tắt Kafka, dùng inline fallback)
+kafka:
+  # Danh sách brokers (phân tách bằng dấu phẩy). Rỗng = tắt Kafka.
+  brokers: "kafka1.tonytran.xyz:9093,kafka2.tonytran.xyz:9093,kafka3.tonytran.xyz:9093"
+  clickTopic: "link-clicks"
+  consumerGroup: "click-consumer"
+  # SASL: để trống mechanism = không dùng SASL.
+  saslMechanism: "SCRAM-SHA-256"
+  saslUsername: "app-consumer"
+  tlsEnabled: true
+  # KAFKA_SASL_PASSWORD lấy từ Secret. Khi existingSecretName rỗng, password rỗng.
+  existingSecretName: "kafka-secret"
+  existingSecretKey: "sasl-password"

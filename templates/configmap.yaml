@@ -42,3 +42,10 @@ data:
   QUOTA_BASIC_FALLBACK_LIMIT: {{ .Values.quota.basicFallbackLimit | quote }}
   QUOTA_BREAKER_MAX_FAILURES: {{ .Values.quota.breakerMaxFailures | quote }}
   QUOTA_BREAKER_OPEN_TIMEOUT: {{ .Values.quota.breakerOpenTimeout | quote }}
+  # Kafka (SASL password lấy từ Secret, không đặt ở đây)
+  KAFKA_BROKERS: {{ .Values.kafka.brokers | quote }}
+  KAFKA_CLICK_TOPIC: {{ .Values.kafka.clickTopic | quote }}
+  KAFKA_CONSUMER_GROUP: {{ .Values.kafka.consumerGroup | quote }}
+  KAFKA_SASL_MECHANISM: {{ .Values.kafka.saslMechanism | quote }}
+  KAFKA_SASL_USERNAME: {{ .Values.kafka.saslUsername | quote }}
+  KAFKA_TLS_ENABLED: {{ .Values.kafka.tlsEnabled | quote }}

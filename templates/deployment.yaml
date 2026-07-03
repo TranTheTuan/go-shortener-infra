@@ -38,3 +38,12 @@ spec:
         {{- else }}
           value: ""
         {{- end }}
+        - name: KAFKA_SASL_PASSWORD
+        {{- if .Values.kafka.existingSecretName }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.kafka.existingSecretName }}
+              key: {{ .Values.kafka.existingSecretKey }}
+        {{- else }}
+          value: ""
+        {{- end }}
