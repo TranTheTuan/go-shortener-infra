@@ -1,25 +1,25 @@
+{{- if .Values.bulkWorker.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-deployment
+  name: {{ .Release.Name }}-bulk-worker
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.bulkWorker.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ .Release.Name }}-bulk-worker
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ .Release.Name }}-bulk-worker
       annotations:
-        # Rollout lại Pod khi nội dung ConfigMap thay đổi
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
-      - name: {{ .Release.Name }}
+      - name: bulk-worker
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        ports:
-        - containerPort: {{ .Values.server.port }}
+        command: ["./main"]
+        args: ["bulk-worker"]
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-config
@@ -29,15 +29,6 @@ spec:
             secretKeyRef:
               name: {{ .Values.db.existingSecretName }}
               key: {{ .Values.db.existingSecretKey }}
-        - name: REDIS_PASSWORD
-        {{- if .Values.redis.existingSecretName }}
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.redis.existingSecretName }}
-              key: {{ .Values.redis.existingSecretKey }}
-        {{- else }}
-          value: ""
-        {{- end }}
         - name: KAFKA_SASL_PASSWORD
         {{- if .Values.kafka.existingSecretName }}
           valueFrom:
@@ -57,3 +48,4 @@ spec:
             secretKeyRef:
               name: {{ .Values.r2.existingSecretName }}
               key: {{ .Values.r2.secretAccessKeyKey }}
+{{- end }}

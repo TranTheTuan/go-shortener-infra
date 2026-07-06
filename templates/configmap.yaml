@@ -46,6 +46,11 @@ data:
   KAFKA_BROKERS: {{ .Values.kafka.brokers | quote }}
   KAFKA_CLICK_TOPIC: {{ .Values.kafka.clickTopic | quote }}
   KAFKA_CONSUMER_GROUP: {{ .Values.kafka.consumerGroup | quote }}
+  KAFKA_BULK_JOB_TOPIC: {{ .Values.kafka.bulkJobTopic | quote }}
+  KAFKA_BULK_CONSUMER_GROUP: {{ .Values.kafka.bulkConsumerGroup | quote }}
   KAFKA_SASL_MECHANISM: {{ .Values.kafka.saslMechanism | quote }}
   KAFKA_SASL_USERNAME: {{ .Values.kafka.saslUsername | quote }}
   KAFKA_TLS_ENABLED: {{ .Values.kafka.tlsEnabled | quote }}
+  # Cloudflare R2 (access key ID + secret lấy từ Secret, không đặt ở đây)
+  R2_ACCOUNT_ID: {{ .Values.r2.accountID | quote }}
+  R2_BUCKET: {{ .Values.r2.bucket | quote }}
