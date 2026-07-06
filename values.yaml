@@ -74,17 +74,29 @@ quota:
 # Analytics consumer (chạy mode "analyze" — cùng image với server, không có HTTP port)
 consumer:
   enabled: true
-  replicaCount: 1 # tăng nếu topic có nhiều partition; franz-go tự rebalance
-# Kafka (tiền tố KAFKA_; để trống brokers = tắt Kafka, dùng inline fallback)
+  replicaCount: 1   # tăng nếu topic có nhiều partition; franz-go tự rebalance
+# Bulk-job worker (chạy mode "bulk-worker" — tải file R2, shorten, ghi kết quả)
+bulkWorker:
+  enabled: true
+  replicaCount: 1   # tăng nếu bulkJobTopic có nhiều partition
+# Kafka (tiền tố KAFKA_; click-analytics + bulk-job producer/consumer)
 kafka:
-  # Danh sách brokers (phân tách bằng dấu phẩy). Rỗng = tắt Kafka.
   brokers: "kafka1.tonytran.xyz:9093,kafka2.tonytran.xyz:9093,kafka3.tonytran.xyz:9093"
   clickTopic: "link-clicks"
   consumerGroup: "click-consumer"
-  # SASL: để trống mechanism = không dùng SASL.
+  bulkJobTopic: "bulk-link-jobs"
+  bulkConsumerGroup: "bulk-job-consumer"
   saslMechanism: "SCRAM-SHA-256"
   saslUsername: "app-consumer"
   tlsEnabled: true
-  # KAFKA_SASL_PASSWORD lấy từ Secret. Khi existingSecretName rỗng, password rỗng.
   existingSecretName: "kafka-secret"
   existingSecretKey: "sasl-password"
+# Cloudflare R2 (tiền tố R2_; lưu file bulk upload). Endpoint suy ra từ accountID.
+# Khi accountID/accessKey rỗng, các route /api/bulk-jobs không được đăng ký.
+r2:
+  accountID: "30b8eb0776668c8dbe40691090d5f897"
+  bucket: "url-sheets"
+  # Access key ID + secret access key lấy từ Secret có sẵn (không đặt ở đây).
+  existingSecretName: "r2-secret"
+  accessKeyIDKey: "access-key-id"
+  secretAccessKeyKey: "secret-access-key"
