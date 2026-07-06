@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: 22009988/go-shortener
-  tag: sha-1b21a68
+  tag: sha-d17976a
 ingress:
   host: go-short.tonytran.xyz
 # Application
@@ -74,8 +74,7 @@ quota:
 # Analytics consumer (chạy mode "analyze" — cùng image với server, không có HTTP port)
 consumer:
   enabled: true
-  replicaCount: 1   # tăng nếu topic có nhiều partition; franz-go tự rebalance
-
+  replicaCount: 1 # tăng nếu topic có nhiều partition; franz-go tự rebalance
 # Kafka (tiền tố KAFKA_; để trống brokers = tắt Kafka, dùng inline fallback)
 kafka:
   # Danh sách brokers (phân tách bằng dấu phẩy). Rỗng = tắt Kafka.
