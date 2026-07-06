@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: 22009988/go-shortener
-  tag: sha-d17976a
+  tag: sha-07278ac
 ingress:
   host: go-short.tonytran.xyz
 # Application
@@ -74,11 +74,11 @@ quota:
 # Analytics consumer (chạy mode "analyze" — cùng image với server, không có HTTP port)
 consumer:
   enabled: true
-  replicaCount: 1   # tăng nếu topic có nhiều partition; franz-go tự rebalance
+  replicaCount: 1 # tăng nếu topic có nhiều partition; franz-go tự rebalance
 # Bulk-job worker (chạy mode "bulk-worker" — tải file R2, shorten, ghi kết quả)
 bulkWorker:
   enabled: true
-  replicaCount: 1   # tăng nếu bulkJobTopic có nhiều partition
+  replicaCount: 1 # tăng nếu bulkJobTopic có nhiều partition
 # Kafka (tiền tố KAFKA_; click-analytics + bulk-job producer/consumer)
 kafka:
   brokers: "kafka1.tonytran.xyz:9093,kafka2.tonytran.xyz:9093,kafka3.tonytran.xyz:9093"
