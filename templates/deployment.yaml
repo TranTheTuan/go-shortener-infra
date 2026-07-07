@@ -20,6 +20,10 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
         - containerPort: {{ .Values.server.port }}
+        {{- if .Values.metrics.enabled }}
+        - name: metrics
+          containerPort: {{ .Values.metrics.port }}
+        {{- end }}
         envFrom:
         - configMapRef:
             name: {{ .Release.Name }}-config

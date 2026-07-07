@@ -3,10 +3,18 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-service
   namespace: default
+  labels:
+    app: {{ .Release.Name }}   # matched by the ServiceMonitor selector
 spec:
   type: ClusterIP
   ports:
-  - port: 80
+  - name: http
+    port: 80
     targetPort: 8080
+  {{- if .Values.metrics.enabled }}
+  - name: metrics
+    port: {{ .Values.metrics.port }}
+    targetPort: {{ .Values.metrics.port }}
+  {{- end }}
   selector:
     app: {{ .Release.Name }}

@@ -16,6 +16,15 @@ server:
   shutdownTimeout: 10s
   # Địa chỉ pprof debug server. Rỗng = tắt. Trong K8s chỉ bind loopback (kubectl port-forward để truy cập).
   pprofAddr: "localhost:6060"
+# Prometheus metrics (OTel + Prometheus exporter, tiền tố SERVER_METRICS_)
+metrics:
+  enabled: true
+  port: 9464
+  path: /metrics
+  interval: 30s
+  # Helm release name của kube-prometheus-stack — ServiceMonitor BẮT BUỘC mang
+  # label `release: <giá trị này>`, nếu không Prometheus (selector mặc định) bỏ qua.
+  prometheusRelease: proxy-monitor
 # PostgreSQL (tiền tố DB_)
 db:
   # Host chính là tên Service của Postgres trong K8s.
