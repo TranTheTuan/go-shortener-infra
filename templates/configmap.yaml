@@ -12,6 +12,12 @@ data:
   SERVER_WRITE_TIMEOUT: {{ .Values.server.writeTimeout | quote }}
   SERVER_IDLE_TIMEOUT: {{ .Values.server.idleTimeout | quote }}
   SERVER_SHUTDOWN_TIMEOUT: {{ .Values.server.shutdownTimeout | quote }}
+  {{- if .Values.metrics.enabled }}
+  # Prometheus /metrics — bind 0.0.0.0 for in-cluster scrape (not via ingress).
+  SERVER_METRICS_ADDR: "0.0.0.0:{{ .Values.metrics.port }}"
+  {{- else }}
+  SERVER_METRICS_ADDR: ""
+  {{- end }}
   SERVER_PPROF_ADDR: {{ .Values.server.pprofAddr | quote }}
   # PostgreSQL (password lấy từ Secret, không đặt ở đây)
   DB_HOST: {{ .Values.db.host | quote }}

@@ -1,0 +1,19 @@
+{{- if .Values.metrics.enabled }}
+# Tells the Prometheus Operator (kube-prometheus-stack) to scrape the metrics
+# port. The `release` label MUST match the stack's Helm release, otherwise the
+# default serviceMonitorSelector ignores this object and nothing is scraped.
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Values.metrics.prometheusRelease }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  endpoints:
+  - port: metrics
+    path: {{ .Values.metrics.path }}
+    interval: {{ .Values.metrics.interval }}
+{{- end }}
