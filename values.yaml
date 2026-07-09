@@ -49,7 +49,7 @@ redis:
   port: 6379
   db: 0
   poolSize: 300
-  minIdleConns: 5
+  minIdleConns: 100
   # Khi existingSecretName rỗng, Redis kết nối không cần password.
   existingSecretName: "redis-secret"
   existingSecretKey: "redis-password"
