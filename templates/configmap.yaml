@@ -60,3 +60,10 @@ data:
   # Cloudflare R2 (access key ID + secret lấy từ Secret, không đặt ở đây)
   R2_ACCOUNT_ID: {{ .Values.r2.accountID | quote }}
   R2_BUCKET: {{ .Values.r2.bucket | quote }}
+  # OpenTelemetry tracing (OTLP gRPC -> Alloy forwarder -> Tempo). Head sampling
+  # decided in-app; endpoint is in-cluster only (never via ingress).
+  TRACING_ENABLED: {{ .Values.tracing.enabled | quote }}
+  TRACING_OTLP_ENDPOINT: {{ .Values.tracing.otlpEndpoint | quote }}
+  TRACING_SAMPLE_RATIO: {{ .Values.tracing.sampleRatio | quote }}
+  # Tags traces/metrics with the running build; reuse the image tag (git sha).
+  SERVICE_VERSION: {{ .Values.image.tag | quote }}

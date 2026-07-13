@@ -100,6 +100,13 @@ kafka:
   tlsEnabled: true
   existingSecretName: "kafka-secret"
   existingSecretKey: "sasl-password"
+# OpenTelemetry tracing (tiền tố TRACING_; OTLP -> Alloy DaemonSet -> Tempo)
+tracing:
+  enabled: true
+  # OTLP gRPC endpoint = Alloy forwarder trong namespace monitoring.
+  otlpEndpoint: "alloy.monitoring.svc.cluster.local:4317"
+  # 1.0 = giữ mọi trace (traffic thật thấp). Hạ xuống chỉ khi load test.
+  sampleRatio: 1.0
 # Cloudflare R2 (tiền tố R2_; lưu file bulk upload). Endpoint suy ra từ accountID.
 # Khi accountID/accessKey rỗng, các route /api/bulk-jobs không được đăng ký.
 r2:
