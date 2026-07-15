@@ -67,3 +67,7 @@ data:
   TRACING_SAMPLE_RATIO: {{ .Values.tracing.sampleRatio | quote }}
   # Tags traces/metrics with the running build; reuse the image tag (git sha).
   SERVICE_VERSION: {{ .Values.image.tag | quote }}
+  # Paddle Billing (API key + webhook secret lấy từ Secret, không đặt ở đây)
+  PADDLE_ENABLED: {{ .Values.paddle.enabled | quote }}
+  PADDLE_CLIENT_TOKEN: {{ .Values.paddle.clientToken | quote }}
+  PADDLE_BASE_URL: {{ .Values.paddle.baseURL | quote }}

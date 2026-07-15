@@ -116,3 +116,11 @@ r2:
   existingSecretName: "r2-secret"
   accessKeyIDKey: "access-key-id"
   secretAccessKeyKey: "secret-access-key"
+# Paddle Billing (tiền tố PADDLE_; bật khi enabled=true)
+paddle:
+  enabled: true
+  clientToken: "test_9b1cd6bdab4392a3cd075b25ccd"
+  baseURL: "https://api.paddle.com"
+  existingSecretName: "paddle-secret"
+  apiKeyKey: "api-key"
+  webhookSecretKey: "webhook-secret"
