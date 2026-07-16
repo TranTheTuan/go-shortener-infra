@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: 22009988/go-shortener
-  tag: sha-bee78ca
+  tag: sha-7b3d42a
 ingress:
   host: go-short.tonytran.xyz
 # Application
